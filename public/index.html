@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Teste Bot NuvemITech</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, textarea { width: 100%; padding: 8px; margin: 5px 0; }
+    button { padding: 10px 20px; }
+    #response { margin-top: 20px; background: #eee; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h2>Enviar mensagem para o Bot</h2>
+  <label>Telefone (ex: 5511999999999)</label>
+  <input type="text" id="phone" />
+  <label>Mensagem</label>
+  <textarea id="message"></textarea>
+  <button onclick="sendMessage()">Enviar</button>
+
+  <div id="response"></div>
+
+  <script>
+    async function sendMessage() {
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if (!phone || !message) {
+        alert('Preencha telefone e mensagem');
+        return;
+      }
+      const res = await fetch('/webhook', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ phone, message })
+      });
+      const data = await res.json();
+      document.getElementById('response').innerText = 'Bot respondeu: ' + data.reply;
+    }
+  </script>
+</body>
+</html>

@@ -22,6 +22,8 @@ db.serialize(() => {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL,
       phone TEXT NOT NULL,
+      problem TEXT,
+      active_chat INTEGER DEFAULT 1,
       timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     )
   `);
