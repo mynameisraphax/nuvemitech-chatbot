@@ -1,1 +1,4 @@
 node_modules/
+.wwebjs_auth/
+leads.db
+leads_backup.db

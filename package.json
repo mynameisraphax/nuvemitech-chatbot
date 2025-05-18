@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node chatbot.js",
     "start-crm": "node crm.js",
+    "start:chatbot": "NODE_ENV=production node chatbot.js",
     "build:css": "tailwindcss -i ./public/input.css -o ./public/styles.css --minify"
   },
   "engines": {
