@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+   <html lang="pt-BR">
+   <head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>NuvemITech - CRM Dashboard</title>
+       <link rel="stylesheet" href="/css/style.css">
+   </head>
+   <body>
+       <div class="container">
+           <img src="/logo.png" alt="NuvemITech Logo" class="logo">
+           <h1>NuvemITech CRM</h1>
+           <p>Gerencie seus leads e promoções</p>
+           <% if (error) { %>
+               <div class="error"><%= error %></div>
+           <% } %>
+           <% if (success) { %>
+               <div class="success" style="color: green; text-align: center; margin: 10px 0;"><%= success %></div>
+           <% } %>
+           <div class="step">
+               <h3>Leads</h3>
+               <table>
+                   <thead>
+                       <tr>
+                           <th>ID</th>
+                           <th>Nome</th>
+                           <th>Telefone</th>
+                           <th>Data/Hora</th>
+                           <th>Ação</th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       <% leads.forEach(lead => { %>
+                           <tr>
+                               <td><%= lead.id %></td>
+                               <td><%= lead.name %></td>
+                               <td><%= lead.phone %></td>
+                               <td><%= lead.timestamp %></td>
+                               <td><a href="https://wa.me/<%= lead.phone %>" target="_blank">Contactar</a></td>
+                           </tr>
+                       <% }) %>
+                   </tbody>
+               </table>
+           </div>
+           <div class="step">
+               <h3>Enviar Promoção</h3>
+               <form action="/promo" method="POST" enctype="multipart/form-data">
+                   <textarea name="promoText" placeholder="Digite o texto da promoção" required style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 1em;"></textarea>
+                   <input type="file" name="promoImage" accept="image/jpeg" required>
+                   <select name="schedule" style="width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 1em;">
+                       <option value="once">Enviar uma vez</option>
+                       <option value="weekly">Agendar envio semanal (segundas às 9h)</option>
+                   </select>
+                   <button type="submit">Enviar Promoção</button>
+               </form>
+           </div>
+           <div class="logout">
+               <a href="/logout">Sair</a>
+           </div>
+       </div>
+       <script src="/js/script.js"></script>
+   </body>
+   </html>
