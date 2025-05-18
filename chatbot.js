@@ -9,7 +9,7 @@ const P = require('pino');
 
 dotenv.config();
 
-const dbPath = process.env.NODE_ENV === 'production' ? '/opt/render/project/src/data/leads.db' : './leads.db';
+const dbPath = process.env.NODE_ENV === 'production' ? '/app/data/leads.db' : './leads.db';
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) console.error('Erro ao conectar ao SQLite:', err.message);
   else console.log('Conectado ao SQLite.');
@@ -46,7 +46,7 @@ db.serialize(() => {
 });
 
 async function connectToWhatsApp() {
-  const authPath = process.env.NODE_ENV === 'production' ? '/opt/render/project/src/data/.wwebjs_auth' : './.wwebjs_auth';
+  const authPath = process.env.NODE_ENV === 'production' ? '/app/data/.wwebjs_auth' : './.wwebjs_auth';
   const { state, saveCreds } = await useMultiFileAuthState(authPath);
   const sock = makeWASocket({
     auth: state,
